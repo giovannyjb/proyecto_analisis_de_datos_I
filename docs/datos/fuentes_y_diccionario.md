@@ -10,36 +10,49 @@ Completar tras descargar los datos en `data/raw/`.
 
 | Archivo | Formato | Descripción | Uso en el análisis |
 |---------|---------|-------------|-------------------|
-| *TODO* | | | |
+| *Pendiente* | | Catálogo de servicios | Variables del servicio, ANS definidos |
+| *Pendiente* | | Datos de atención prestada | Demanda, tiempos, cumplimiento ANS |
 
-## Diccionario de columnas
+## Diccionario — Catálogo de servicios
 
-Completar por cada archivo relevante.
+Columnas identificadas por el equipo:
 
-### Archivo: *nombre_archivo.csv* (ejemplo)
+| Columna | Tipo esperado | Descripción | Uso en el análisis |
+|---------|---------------|-------------|-------------------|
+| ID Servicio | | Identificador único del servicio | Clave para cruzar con atención |
+| Servicio | texto | Nombre del servicio | Identificación y reportes |
+| Categoría | texto | Categoría del servicio | Distribución y agrupación |
+| Dueño del Servicio | texto | Responsable del servicio | Contexto organizacional |
+| Unidad Responsable | texto | Unidad que opera el servicio | Contexto organizacional |
+| Horario de atención | texto / hora | Ventana de atención | Característica del servicio |
+| Disponibilidad esperada | numérico / % | Disponibilidad definida | KPI y features del modelo |
+| ANS Solicitud | texto / tiempo | ANS para solicitudes | Referencia de cumplimiento |
+| ANS Incidente | texto / tiempo | ANS para incidentes | Referencia de cumplimiento |
+| ANS Incidente Crítico | texto / tiempo | ANS para incidentes críticos | Referencia de cumplimiento |
+| Usuarios Objetivo | texto | Perfil de usuarios del servicio | Característica del servicio |
 
-| Columna | Tipo | Descripción | Valores / notas |
-|---------|------|-------------|-----------------|
-| *TODO* | | | |
+## Variable objetivo (modelo de clasificación)
+
+| Variable | Valores | Descripción |
+|----------|---------|-------------|
+| Cumple ANS | `1` = Cumple, `0` = No cumple | Variable objetivo para predicción 2026 |
 
 ## Relaciones entre archivos
 
-Describir cómo se relacionan los archivos (ej. `id_servicio` en tickets ↔ `id` en catálogo).
-
 | Archivo A | Columna | Archivo B | Columna | Tipo de relación |
 |-----------|---------|-----------|---------|------------------|
-| *TODO* | | | | |
+| Catálogo | ID Servicio | Atención prestada | ID Servicio (o equivalente) | Uno a muchos |
 
 ## Calidad de datos observada
 
 | Aspecto | Hallazgo | Acción |
 |---------|----------|--------|
-| Valores nulos | *TODO* | |
-| Duplicados | *TODO* | |
-| Formato de fechas | *TODO* | |
-| Consistencia de nombres de servicio | *TODO* | |
+| Valores nulos | *Pendiente* | |
+| Duplicados | *Pendiente* | |
+| Formato de fechas | *Pendiente* | |
+| Consistencia de nombres de servicio | *Pendiente* | |
 
 ## Notas
 
-- Actualizar este documento cada vez que se agreguen o modifiquen archivos en `data/raw/`.
-- Si un archivo se renombra al copiarlo al repo, registrar el nombre original del Drive y el nombre local.
+- Actualizar este documento cuando los archivos estén en `data/raw/`.
+- Validar nombres exactos de columnas al cargar los archivos del Drive.

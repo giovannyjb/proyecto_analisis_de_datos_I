@@ -2,34 +2,28 @@
 
 ## Problema que aborda el análisis
 
-El catálogo de servicios TI contiene muchos registros con varias dimensiones (categoría, demanda, cumplimiento ANS, actualización). Revisar esto manualmente es lento y propenso a omitir patrones. La ciencia de datos y herramientas de IA permiten explorar, visualizar y sintetizar esa información de forma sistemática.
+El catálogo de servicios TI y los registros de atención contienen múltiples variables (categoría, ANS, demanda, tiempos, cumplimiento). Revisar esto manualmente es lento y no permite anticipar incumplimientos. La ciencia de datos e IA permiten explorar patrones, medir cumplimiento y construir modelos de clasificación.
 
-## Técnica aplicada en el Taller 1
+## Técnicas aplicadas en este proyecto
 
 | Técnica | Uso en este proyecto | Por qué es pertinente |
 |---------|----------------------|----------------------|
-| **Análisis exploratorio de datos (EDA)** | Perfilado de tablas, conteos, distribuciones, nulos, duplicados | Primera fase obligatoria para entender calidad y estructura del catálogo antes de cualquier modelo |
-| **Análisis descriptivo** | Rankings de demanda, % cumplimiento ANS, distribución por categoría | Responde directamente la pregunta SMART sin necesidad de predicción |
-| **Visualización** | Barras (top servicios), heatmaps (demanda vs cumplimiento) | Facilita comunicar hallazgos a gestión TI no técnica |
-| **IA generativa (asistente de código)** | Generación y refinamiento del notebook, limpieza de datos, narrativa del análisis | Acelera el prototipo funcional exigido por el taller; el equipo valida y adapta el código |
+| **Análisis exploratorio de datos (EDA)** | Perfilado del catálogo y datos de atención; nulos, distribuciones, relaciones | Primera fase para validar calidad y variables antes del modelo |
+| **Análisis descriptivo** | Servicios existentes, demanda, cumplimiento ANS, mejores/peores resultados, distribución | Responde al estado actual del catálogo y contexto del problema |
+| **Clasificación (IA)** | Predecir si un servicio cumplirá o incumplirá ANS en 2026 | Variable objetivo binaria (1 = Cumple, 0 = No cumple); alineada con la pregunta SMART |
+| **Visualización** | Distribución de servicios, demanda vs cumplimiento | Comunicar hallazgos a gestión TI |
+| **IA generativa** | Asistencia en notebook, limpieza de datos y documentación | Acelera el prototipo del taller; el equipo valida resultados |
 
-## Por qué no usar ML en esta fase
+## Por qué clasificación es pertinente
 
-El taller 1 pide una **foto del estado actual** (analítica descriptiva). Un modelo predictivo o de clasificación requeriría datos históricos limpios y una pregunta orientada al futuro. El EDA valida si esos datos existen y son suficientes para una fase 2.
-
-## Técnicas futuras (si el problema evoluciona)
-
-| Tipo de problema IA | Escenario | Datos necesarios |
-|-----------------------|-----------|------------------|
-| **Clasificación** | Predecir si un ticket cumplirá o no el ANS | Historial de tickets con etiqueta cumple/incumple |
-| **Regresión** | Estimar tiempo de resolución | Tiempos reales, categoría, prioridad, carga |
-| **Clustering** | Agrupar servicios por perfil similar | Matriz servicio × métricas de demanda y SLA |
+La pregunta SMART pide **predecir** cumplimiento o incumplimiento de ANS. Eso corresponde a un problema de **clasificación binaria**: la variable objetivo es Cumple ANS (Sí/No). Con datos de atención prestada y características del servicio, un modelo puede identificar patrones asociados al incumplimiento y alertar servicios en riesgo durante 2026.
 
 ## Contribución esperada al negocio
 
-- Identificar servicios de **alta demanda y bajo cumplimiento** para acción inmediata.
-- Detectar **inconsistencias en el catálogo** (datos faltantes, desactualizados).
-- Base cuantitativa para **priorizar mejoras** en ANS y actualización del catálogo.
+- Anticipar servicios con riesgo de incumplimiento ANS.
+- Priorizar recursos en servicios de alta demanda y bajo cumplimiento.
+- Apoyar metas de: disponibilidad ≥ 99.5%, cumplimiento ANS ≥ 95%, satisfacción ≥ 90%, resolución ≤ 8 h.
+- Fortalecer continuidad operativa y soporte a procesos estratégicos.
 
 ## Evidencia de uso de IA generativa
 

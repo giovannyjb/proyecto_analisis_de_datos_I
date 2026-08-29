@@ -43,9 +43,9 @@ Kernel: **Python (proyecto_analisis_de_datos_I)**.
 | Área | Estado |
 |------|--------|
 | Estructura del repo | Lista |
-| Documentación (`docs/taller1/`) | Plantillas con borradores — completar en equipo |
+| Documentación (`docs/taller1/`) | Respuestas del taller completadas |
 | Datos en `data/raw/` | Pendiente descarga del Drive |
-| Notebook EDA | Esqueleto con secciones TODO |
+| Notebook EDA | Esqueleto — sección D pendiente |
 | Análisis final | Pendiente |
 
 ## Estructura del repositorio

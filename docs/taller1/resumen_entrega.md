@@ -1,6 +1,6 @@
 # Resumen para entrega — Taller 1
 
-Documento consolidado para Moodle. Actualizar antes de entregar.
+Documento consolidado para Moodle.
 
 ---
 
@@ -8,36 +8,53 @@ Documento consolidado para Moodle. Actualizar antes de entregar.
 
 La empresa cuenta con un catálogo de servicios de TI, pero la información puede presentar diferencias en su nivel de detalle, actualización y cumplimiento de los ANS. Esto dificulta identificar cuáles servicios tienen mayor demanda y cuáles presentan incumplimientos.
 
-- **Áreas/procesos afectados:** gestión de servicios TI, mesa de ayuda, cumplimiento de SLAs, planificación de capacidad.
-- **KPI:** porcentaje de cumplimiento ANS por servicio y volumen de demanda (solicitudes/tickets por servicio).
+- **Impacto:** continuidad operativa, disponibilidad de servicios tecnológicos y soporte a procesos estratégicos.
+- **KPI:** cumplimiento ANS por servicio, volumen de demanda, disponibilidad, satisfacción y tiempo de resolución.
 
 ## 2. Complejidad y disponibilidad de datos
 
-- **Datos necesarios:** catálogo de servicios, registro de solicitudes/tickets, métricas ANS/SLA, fechas de actualización.
+- **Catálogo:** ID Servicio, Servicio, Categoría, Dueño del Servicio, Unidad Responsable, Horario de atención, Disponibilidad esperada, ANS Solicitud, ANS Incidente, ANS Incidente Crítico, Usuarios Objetivo.
+- **Atención prestada:** datos de solicitudes/incidentes y cumplimiento (para predicción).
 - **Fuente:** [Google Drive — Grupo 3](https://drive.google.com/drive/u/1/folders/1NzXBrdwk3EW74dB6GLmYZ_qp86arPvtH).
-- **Complejidad:** media — múltiples variables (servicio, categoría, volumen, cumplimiento, fechas); posibles inconsistencias entre fuentes.
+- **Complejidad:** media-alta — múltiples variables y posibles inconsistencias entre catálogo y operación.
 
-## 3. Justificación del uso de IA / Ciencia de Datos
+## 3. Tipo de analítica y problema de IA
 
-Se aplicará **análisis exploratorio y descriptivo** (pandas, visualización) para perfilar el catálogo, rankear demanda y medir cumplimiento ANS. La IA generativa asiste en la construcción del notebook y la limpieza inicial; el equipo valida resultados. Técnicas futuras posibles: clasificación de cumplimiento ANS o regresión de tiempos de resolución.
+- **Analítica descriptiva:** explorar qué servicios existen, demanda, cumplimiento ANS, resultados y distribución.
+- **Problema de IA:** clasificación — variable objetivo Cumple ANS (1 = Cumple, 0 = No cumple).
 
-## 4. Pregunta SMART
+## 4. Caso similar (estado del arte)
 
-**Pregunta:** ¿Cuáles son los 10 servicios del catálogo de TI con mayor volumen de solicitudes y qué porcentaje de cumplimiento ANS presentan en el último trimestre disponible en los datos?
+Se utiliza el catálogo de servicios y los ANS para organizar, medir y mejorar la prestación de servicios. En entidades públicas, estos instrumentos permiten identificar demanda, evaluar cumplimiento y apoyar la toma de decisiones.
+
+## 5. Impacto en el negocio con métricas
+
+- Disponibilidad de servicios TI ≥ 99.5%
+- Cumplimiento global de ANS ≥ 95%
+- Satisfacción de usuarios ≥ 90%
+- Tiempo promedio de resolución ≤ 8 horas
+
+## 6. Pregunta SMART
+
+**Pregunta:** ¿Es posible predecir, durante el 2026, si un servicio de TI de la empresa cumplirá o incumplirá su ANS, utilizando los datos actuales en la atención prestada y características del servicio?
 
 | SMART | Cumplimiento |
 |-------|--------------|
-| Específica | Servicios del catálogo TI, demanda y cumplimiento ANS |
-| Medible | Conteo de solicitudes y % cumplimiento ANS |
-| Accionable | Priorización de servicios críticos para mejora |
-| Realista | Datos en Drive del grupo; EDA con herramientas estándar |
-| Temporal | Último trimestre disponible en los datos |
+| Específica | Servicios TI, cumplimiento/incumplimiento ANS, atención prestada y características del servicio |
+| Medible | Cumple ANS (1/0); métricas de clasificación y KPIs de ANS |
+| Accionable | Anticipar riesgo e priorizar mejoras |
+| Realista | Datos del catálogo y atención disponibles o en consolidación |
+| Temporal | Horizonte 2026 |
 
-## 5. Análisis exploratorio de datos (entregable)
+## 7. Justificación IA / Ciencia de Datos
+
+EDA y análisis descriptivo para entender el catálogo; clasificación binaria para predecir cumplimiento ANS. La IA generativa asiste en el prototipo del taller; el equipo valida resultados.
+
+## 8. Análisis exploratorio de datos (entregable)
 
 - **Herramienta:** Jupyter Notebook — `notebooks/taller1_eda_catalogo_ti.ipynb`
-- **Evidencia:** ejecutar el notebook con datos en `data/raw/` y adjuntar capturas o enlace al repositorio.
+- **Estado:** esqueleto con respuestas del taller; EDA pendiente de ejecutar con datos en `data/raw/`.
 
 ---
 
-*Última actualización: completar fecha y nombres del equipo antes de entregar.*
+*Completar fecha y nombres del equipo antes de entregar.*
