@@ -2,33 +2,34 @@
 
 ## Pregunta
 
-> ¿Es posible predecir, durante el 2026, si un servicio de TI de la empresa cumplirá o incumplirá su ANS, utilizando los datos actuales en la atención prestada y características del servicio?
+> ¿Puede un sistema de analítica predictiva basado en inteligencia artificial anticipar brotes de dengue con una precisión superior al 80 %, permitiendo reducir en al menos 20 % la tasa de mortalidad y en 30 % el tiempo de respuesta sanitaria en los territorios priorizados durante un piloto de 6 meses, utilizando datos epidemiológicos, climáticos y demográficos del Instituto Nacional de Salud y el IDEAM?
 
 ## Desglose SMART
 
 | Criterio | Cómo se cumple |
 |----------|----------------|
-| **Específica (Specific)** | Se enfoca en servicios de TI de la empresa y su cumplimiento o incumplimiento de ANS, usando características del servicio y datos de atención prestada. |
-| **Medible (Measurable)** | Resultado binario: cumple ANS (`1`) o no cumple (`0`); evaluable con métricas de clasificación (precisión, recall, F1) y cumplimiento global de ANS. |
-| **Accionable (Achievable / Actionable)** | Permite anticipar servicios en riesgo de incumplimiento y priorizar acciones de mejora antes de que afecten la operación. |
-| **Realista (Realistic)** | Los datos del catálogo y de atención están disponibles o en proceso de consolidación en el Drive del grupo; la clasificación es una técnica aplicable con esas variables. |
-| **Temporal (Time-bound)** | El horizonte de predicción es el año **2026**. |
+| **Específica (Specific)** | Sistema de analítica predictiva con IA para anticipar brotes de dengue en territorios priorizados, usando datos del INS y el IDEAM. |
+| **Medible (Measurable)** | Precisión del modelo > 80 %; reducción de mortalidad ≥ 20 %; reducción del tiempo de respuesta sanitaria ≥ 30 %. |
+| **Accionable (Achievable / Actionable)** | Permite generar alertas tempranas, priorizar territorios y orientar la respuesta sanitaria antes del pico del brote. |
+| **Realista (Realistic)** | Fuentes oficiales disponibles (INS/SIVIGILA, IDEAM, DANE); técnicas de regresión y ML validadas en literatura sobre dengue. |
+| **Temporal (Time-bound)** | Piloto de **6 meses** en territorios priorizados. |
 
 ## Indicadores vinculados a la pregunta
 
-| Indicador | Definición | Meta / referencia |
-|-----------|------------|-------------------|
-| Cumplimiento global de ANS | % de servicios/casos dentro del ANS | ≥ 95% |
-| Disponibilidad de servicios TI | % de tiempo operativo | ≥ 99.5% |
-| Satisfacción de usuarios | Nivel de satisfacción con el servicio | ≥ 90% |
-| Tiempo promedio de resolución | Horas promedio de resolución | ≤ 8 horas |
-| Variable objetivo (modelo) | Cumple ANS: 1 = Cumple, 0 = No cumple | Clasificación binaria |
+| Indicador | Definición | Meta |
+|-----------|------------|------|
+| Precisión del modelo | % de predicciones correctas de brotes | > 80 % |
+| Tasa de mortalidad | Fallecimientos / casos confirmados por territorio | Reducción ≥ 20 % |
+| Tiempo de respuesta sanitaria | Horas/días desde alerta hasta intervención | Reducción ≥ 30 % |
+| Cobertura de vigilancia | Municipios de alto riesgo monitoreados | Incrementar cobertura |
+| Casos y fallecimientos | Número esperado por municipio (regresión) | Estimación para planificación |
 
 ## Criterio de éxito del EDA (Taller 1)
 
-El notebook [`notebooks/taller1_eda_catalogo_ti.ipynb`](../../notebooks/taller1_eda_catalogo_ti.ipynb) debe explorar:
+El notebook [`notebooks/taller1_eda_dengue.ipynb`](../../notebooks/taller1_eda_dengue.ipynb) debe explorar:
 
-1. Estructura y calidad del catálogo y datos de atención.
-2. Distribución de servicios, demanda y cumplimiento ANS.
-3. Variables disponibles para alimentar un modelo de clasificación.
-4. Conclusiones sobre viabilidad de la predicción para 2026.
+1. Estructura y calidad de datos epidemiológicos, climáticos y demográficos.
+2. Distribución de casos y fallecimientos por territorio y periodo.
+3. Relación entre variables climáticas y brotes históricos.
+4. Variables disponibles para alimentar un modelo de regresión predictivo.
+5. Viabilidad del piloto de 6 meses con precisión > 80 %.

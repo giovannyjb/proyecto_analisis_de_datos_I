@@ -4,23 +4,23 @@
 
 | Campo | Contenido |
 |-------|-----------|
-| **Descripción del problema e impacto en la organización (incluyendo métrica)** | La empresa cuenta con un catálogo de servicios de TI, pero la información puede presentar diferencias en su nivel de detalle, actualización y cumplimiento de los ANS. Esto dificulta identificar cuáles servicios tienen mayor demanda y cuáles presentan incumplimientos. **Áreas afectadas:** gestión de servicios TI, continuidad operativa y soporte a procesos estratégicos. **KPI relacionados:** cumplimiento ANS por servicio, volumen de demanda y métricas globales de disponibilidad y resolución. |
-| **Tipo de analítica** | **Descriptiva** — se analizarán los datos actuales del catálogo para saber: qué servicios existen, cuáles tienen mayor demanda, cuáles cumplen o incumplen los ANS, qué servicios presentan mejores o peores resultados y cómo están distribuidos los servicios. La pregunta SMART orienta además un enfoque **predictivo** (clasificación) para 2026. |
-| **Caso similar (estado del arte)** | Actualmente se utiliza el catálogo de servicios y los acuerdos de nivel de servicio (ANS) para organizar, medir y mejorar la prestación de servicios. En entidades públicas, estos instrumentos permiten identificar la demanda, evaluar el cumplimiento de los ANS y apoyar la toma de decisiones. |
-| **Tipo de problema de IA** | **Clasificación** — variable objetivo: **Cumple ANS** (Sí/No). `1` = Cumple, `0` = No cumple. |
-| **Datos necesarios y disponibilidad** | **Catálogo de servicios:** ID Servicio, Servicio, Categoría, Dueño del Servicio, Unidad Responsable, Horario de atención, Disponibilidad esperada, ANS Solicitud, ANS Incidente, ANS Incidente Crítico, Usuarios Objetivo. **Adicional para la pregunta SMART:** datos de la atención prestada (solicitudes/incidentes, tiempos, cumplimiento histórico). **Fuente:** [Google Drive — Grupo 3](https://drive.google.com/drive/u/1/folders/1NzXBrdwk3EW74dB6GLmYZ_qp86arPvtH). Ver [`docs/datos/fuentes_y_diccionario.md`](../../datos/fuentes_y_diccionario.md). |
-| **Impacto en el negocio con métricas** | **Impacto:** garantizar la continuidad operativa, la disponibilidad de los servicios tecnológicos y el soporte a los procesos estratégicos de la empresa. **Métricas objetivo:** Disponibilidad de servicios TI ≥ 99.5%; Cumplimiento global de ANS ≥ 95%; Satisfacción de usuarios ≥ 90%; Tiempo promedio de resolución ≤ 8 horas. |
+| **Descripción del problema e impacto en la organización (incluyendo métrica)** | El aumento recurrente de casos de dengue en el territorio nacional genera una sobrecarga hospitalaria y un incremento en la mortalidad de la población afectada, lo que constituye una amenaza directa para la salud pública. Se requiere validar la tasa de mortalidad en relación con la incidencia de picaduras del vector y determinar los territorios con mayores índices de fallecimientos, con el fin de orientar políticas de prevención y respuesta sanitaria. **Métricas clave:** tasa de mortalidad, incidencia de casos, índice de fallecimientos por territorio. |
+| **Tipo de analítica** | **Predictiva** — el análisis busca anticipar los territorios y periodos con mayor riesgo de brotes de dengue y fallecimientos, utilizando variables epidemiológicas, climáticas y demográficas. Esto permite generar alertas tempranas y orientar la toma de decisiones en salud pública. |
+| **Caso similar (estado del arte)** | Ver referencias en [`justificacion_ia.md`](justificacion_ia.md). Resumen: modelos predictivos (regresión logística, redes neuronales, árboles de decisión) para anticipar hospitalización y mortalidad; factores ambientales (temperatura, humedad, lluvias) como indicadores de brotes; sistemas automatizados con machine learning para detección temprana y alertas predictivas. |
+| **Tipo de problema de IA** | **Regresión** — estimar el número esperado de casos y fallecimientos en los diferentes municipios del país. |
+| **Datos necesarios y disponibilidad** | Datos históricos de casos y fallecimientos por dengue (INS, SIVIGILA); variables meteorológicas (IDEAM): temperatura, lluvia, humedad; datos demográficos y de densidad poblacional (DANE); información sobre saneamiento y presencia de criaderos (Secretarías de Salud); coordenadas geográficas para análisis espacial y mapas de riesgo. **Fuente del equipo:** [Google Drive — Grupo 3](https://drive.google.com/drive/u/1/folders/1NzXBrdwk3EW74dB6GLmYZ_qp86arPvtH). Ver [`docs/datos/fuentes_y_diccionario.md`](../../datos/fuentes_y_diccionario.md). |
+| **Impacto en el negocio con métricas** | 1. Reducción de la tasa de mortalidad por el vector en los territorios con mayores incidencias para los meses continuos. 2. Disminuir la respuesta sanitaria ante brotes de dengue mediante la integración de datos epidemiológicos y climáticos. 3. Incrementar la cobertura de vigilancia de municipios con alto riesgo de brotes. |
 | **Pregunta SMART** | Ver documento dedicado: [`pregunta_smart.md`](pregunta_smart.md). |
 
 ## Complejidad del problema
 
 | Aspecto | Descripción |
 |---------|-------------|
-| Variables involucradas | ID y nombre de servicio, categoría, dueño, unidad responsable, horarios, disponibilidad, ANS (solicitud, incidente, crítico), usuarios objetivo, datos de atención prestada, cumplimiento ANS |
-| Procesos involucrados | Gestión del catálogo, atención de solicitudes e incidentes, monitoreo de ANS, reportes de cumplimiento y toma de decisiones |
-| Dificultad técnica | Media-alta — integrar catálogo con datos operativos de atención; posibles inconsistencias en detalle, actualización y formatos; preparación de variable objetivo para clasificación |
+| Variables involucradas | Casos y fallecimientos por municipio, temperatura, lluvia, humedad, densidad poblacional, saneamiento, criaderos, coordenadas geográficas, periodo temporal |
+| Procesos involucrados | Vigilancia epidemiológica (SIVIGILA), monitoreo climático, respuesta sanitaria territorial, políticas de prevención |
+| Dificultad técnica | Alta — integración de múltiples fuentes (INS, IDEAM, DANE, Secretarías de Salud), análisis espacial y modelos predictivos |
 
 ## Notas del equipo
 
 - Actualizar diccionario de datos cuando los archivos estén en `data/raw/`.
-- El EDA (Taller 1) explora los datos antes de construir el modelo de clasificación.
+- El EDA (Taller 1) explora los datos antes de construir el modelo de regresión.

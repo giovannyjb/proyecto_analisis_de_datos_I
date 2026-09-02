@@ -6,54 +6,60 @@ Documento consolidado para Moodle.
 
 ## 1. Descripción del problema e impacto
 
-La empresa cuenta con un catálogo de servicios de TI, pero la información puede presentar diferencias en su nivel de detalle, actualización y cumplimiento de los ANS. Esto dificulta identificar cuáles servicios tienen mayor demanda y cuáles presentan incumplimientos.
+El aumento recurrente de casos de dengue en el territorio nacional genera sobrecarga hospitalaria e incremento en la mortalidad, constituyendo una amenaza para la salud pública. Se requiere validar la tasa de mortalidad frente a la incidencia del vector y determinar territorios con mayores fallecimientos para orientar políticas de prevención y respuesta sanitaria.
 
-- **Impacto:** continuidad operativa, disponibilidad de servicios tecnológicos y soporte a procesos estratégicos.
-- **KPI:** cumplimiento ANS por servicio, volumen de demanda, disponibilidad, satisfacción y tiempo de resolución.
+- **Métricas clave:** tasa de mortalidad, incidencia de casos, fallecimientos por territorio.
 
-## 2. Complejidad y disponibilidad de datos
+## 2. Tipo de analítica
 
-- **Catálogo:** ID Servicio, Servicio, Categoría, Dueño del Servicio, Unidad Responsable, Horario de atención, Disponibilidad esperada, ANS Solicitud, ANS Incidente, ANS Incidente Crítico, Usuarios Objetivo.
-- **Atención prestada:** datos de solicitudes/incidentes y cumplimiento (para predicción).
-- **Fuente:** [Google Drive — Grupo 3](https://drive.google.com/drive/u/1/folders/1NzXBrdwk3EW74dB6GLmYZ_qp86arPvtH).
-- **Complejidad:** media-alta — múltiples variables y posibles inconsistencias entre catálogo y operación.
+**Predictiva** — anticipar territorios y periodos con mayor riesgo de brotes y fallecimientos usando variables epidemiológicas, climáticas y demográficas. Genera alertas tempranas para la toma de decisiones en salud pública.
 
-## 3. Tipo de analítica y problema de IA
+## 3. Caso similar (estado del arte)
 
-- **Analítica descriptiva:** explorar qué servicios existen, demanda, cumplimiento ANS, resultados y distribución.
-- **Problema de IA:** clasificación — variable objetivo Cumple ANS (1 = Cumple, 0 = No cumple).
+- Delpino et al. (2026): modelos predictivos para severidad, hospitalización y mortalidad por dengue.
+- Martin et al. (2026): factores climáticos (temperatura, humedad, lluvias) como predictores de brotes en Colombia.
+- Kumar et al. (2026): ML para detección temprana y alertas predictivas.
 
-## 4. Caso similar (estado del arte)
+## 4. Tipo de problema de IA
 
-Se utiliza el catálogo de servicios y los ANS para organizar, medir y mejorar la prestación de servicios. En entidades públicas, estos instrumentos permiten identificar demanda, evaluar cumplimiento y apoyar la toma de decisiones.
+**Regresión** — estimar el número esperado de casos y fallecimientos en los municipios del país.
 
-## 5. Impacto en el negocio con métricas
+## 5. Datos necesarios y disponibilidad
 
-- Disponibilidad de servicios TI ≥ 99.5%
-- Cumplimiento global de ANS ≥ 95%
-- Satisfacción de usuarios ≥ 90%
-- Tiempo promedio de resolución ≤ 8 horas
+- Casos y fallecimientos (INS, SIVIGILA)
+- Variables meteorológicas: temperatura, lluvia, humedad (IDEAM)
+- Datos demográficos y densidad poblacional (DANE)
+- Saneamiento y criaderos (Secretarías de Salud)
+- Coordenadas geográficas para análisis espacial
 
-## 6. Pregunta SMART
+**Fuente del equipo:** [Google Drive — Grupo 3](https://drive.google.com/drive/u/1/folders/1NzXBrdwk3EW74dB6GLmYZ_qp86arPvtH)
 
-**Pregunta:** ¿Es posible predecir, durante el 2026, si un servicio de TI de la empresa cumplirá o incumplirá su ANS, utilizando los datos actuales en la atención prestada y características del servicio?
+## 6. Impacto en el negocio con métricas
+
+1. Reducir tasa de mortalidad por el vector en territorios de mayor incidencia.
+2. Disminuir tiempo de respuesta sanitaria ante brotes mediante integración de datos epidemiológicos y climáticos.
+3. Incrementar cobertura de vigilancia en municipios de alto riesgo.
+
+## 7. Pregunta SMART
+
+**Pregunta:** ¿Puede un sistema de analítica predictiva basado en inteligencia artificial anticipar brotes de dengue con una precisión superior al 80 %, permitiendo reducir en al menos 20 % la tasa de mortalidad y en 30 % el tiempo de respuesta sanitaria en los territorios priorizados durante un piloto de 6 meses, utilizando datos epidemiológicos, climáticos y demográficos del Instituto Nacional de Salud y el IDEAM?
 
 | SMART | Cumplimiento |
 |-------|--------------|
-| Específica | Servicios TI, cumplimiento/incumplimiento ANS, atención prestada y características del servicio |
-| Medible | Cumple ANS (1/0); métricas de clasificación y KPIs de ANS |
-| Accionable | Anticipar riesgo e priorizar mejoras |
-| Realista | Datos del catálogo y atención disponibles o en consolidación |
-| Temporal | Horizonte 2026 |
+| Específica | Sistema predictivo con IA, brotes de dengue, datos INS e IDEAM |
+| Medible | Precisión > 80 %, mortalidad −20 %, respuesta −30 % |
+| Accionable | Alertas tempranas y priorización territorial |
+| Realista | Fuentes oficiales y técnicas validadas en literatura |
+| Temporal | Piloto de 6 meses |
 
-## 7. Justificación IA / Ciencia de Datos
+## 8. Justificación IA / Ciencia de Datos
 
-EDA y análisis descriptivo para entender el catálogo; clasificación binaria para predecir cumplimiento ANS. La IA generativa asiste en el prototipo del taller; el equipo valida resultados.
+EDA para explorar datos; regresión y analítica predictiva para estimar casos/fallecimientos y anticipar brotes. La IA generativa asiste en el prototipo; el equipo valida resultados.
 
-## 8. Análisis exploratorio de datos (entregable)
+## 9. Análisis exploratorio de datos (entregable)
 
-- **Herramienta:** Jupyter Notebook — `notebooks/taller1_eda_catalogo_ti.ipynb`
-- **Estado:** esqueleto con respuestas del taller; EDA pendiente de ejecutar con datos en `data/raw/`.
+- **Herramienta:** Jupyter Notebook — `notebooks/taller1_eda_dengue.ipynb`
+- **Estado:** respuestas documentadas; EDA pendiente de ejecutar con datos en `data/raw/`.
 
 ---
 
