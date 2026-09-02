@@ -40,25 +40,24 @@ def raw_data_available() -> bool:
     return len(list_raw_files()) > 0
 
 
-def make_sample_catalog_data(n_services: int = 15) -> pd.DataFrame:
+def make_sample_dengue_data(n_municipios: int = 10) -> pd.DataFrame:
     """
     Dataset de ejemplo para validar el EDA cuando data/raw está vacío.
-    Columnas alineadas con el caso de negocio del catálogo TI.
+    Columnas alineadas con el caso de dengue (epidemiológico + climático).
     """
     import numpy as np
 
     rng = np.random.default_rng(42)
-    services = [f"Servicio TI {i:02d}" for i in range(1, n_services + 1)]
-    categories = rng.choice(
-        ["Infraestructura", "Aplicaciones", "Soporte", "Seguridad", "Redes"],
-        size=n_services,
-    )
-    demand = rng.integers(20, 500, size=n_services)
-    compliance = rng.uniform(0.55, 0.98, size=n_services)
+    municipios = [
+        "Santa Marta", "Cartagena", "Barranquilla", "Montería", "Sincelejo",
+        "Valledupar", "Riohacha", "Cúcuta", "Bucaramanga", "Cali",
+    ][:n_municipios]
 
     return pd.DataFrame({
-        "servicio": services,
-        "categoria": categories,
-        "volumen_solicitudes": demand,
-        "pct_cumplimiento_ans": np.round(compliance * 100, 1),
+        "municipio": municipios,
+        "casos": rng.integers(50, 800, size=n_municipios),
+        "fallecimientos": rng.integers(0, 15, size=n_municipios),
+        "temperatura_c": np.round(rng.uniform(24, 34, size=n_municipios), 1),
+        "lluvia_mm": np.round(rng.uniform(50, 300, size=n_municipios), 1),
+        "humedad_pct": np.round(rng.uniform(60, 95, size=n_municipios), 1),
     })
