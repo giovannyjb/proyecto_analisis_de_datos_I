@@ -28,6 +28,24 @@ Coloca los archivos descargados en `data/raw/`. Ver [`data/README.md`](data/READ
 
 ## Configuración del entorno
 
+Con [uv](https://docs.astral.sh/uv/) (recomendado):
+
+```bash
+uv sync
+```
+
+Eso crea `.venv` e instala las dependencias de `pyproject.toml`. En Cursor/VS Code el intérprete apunta a `.venv` vía `.vscode/settings.json`.
+
+Para abrir el notebook de datos:
+
+```bash
+uv run jupyter lab docs/datos/datos.ipynb
+```
+
+O abre `docs/datos/datos.ipynb` en Cursor y selecciona el kernel **Python (proyecto_analisis_de_datos_I)** / intérprete `.venv`.
+
+Alternativa con pip:
+
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate   # Windows: .venv\Scripts\activate
