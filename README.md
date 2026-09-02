@@ -44,6 +44,16 @@ uv run jupyter lab docs/datos/datos.ipynb
 
 O abre `docs/datos/datos.ipynb` en Cursor y selecciona el kernel **Python (proyecto_analisis_de_datos_I)** / intérprete `.venv`.
 
+## Dashboard interactivo (Streamlit)
+
+Exploración interactiva del EDA de dengue con filtros territoriales y temporales:
+
+```bash
+uv run streamlit run app/dashboard.py
+```
+
+El dashboard carga datos limpios desde `data/processed/dengue_sivigila_{año}_limpio.parquet` o los genera automáticamente desde `data/raw/` la primera vez.
+
 Alternativa con pip:
 
 ```bash
@@ -62,7 +72,8 @@ Kernel: **Python (proyecto_analisis_de_datos_I)**.
 | Estructura del repo | Lista |
 | Documentación (`docs/taller1/`) | Respuestas del taller — dengue |
 | Datos en `data/raw/` | 7 archivos descargados (2019–2025, ~872k registros) |
-| Notebook EDA | Estructura completa (secciones 1–9); código EDA pendiente por sección |
+| Notebook EDA | `notebooks/taller1_eda_dengue.ipynb` — secciones 1–9 con código EDA |
+| Dashboard Streamlit | `app/dashboard.py` — 6 pestañas, filtros multi-año (2019–2025) |
 | Modelo de regresión | Pendiente |
 
 ## Estructura del repositorio
@@ -74,7 +85,8 @@ Kernel: **Python (proyecto_analisis_de_datos_I)**.
 | [`data/raw/`](data/raw/) | Datos originales (no versionados si son grandes) |
 | [`data/processed/`](data/processed/) | Datos limpios exportados del EDA |
 | [`notebooks/`](notebooks/) | Notebook Jupyter del EDA |
-| [`src/`](src/) | Utilidades de carga y configuración de rutas |
+| [`src/`](src/) | Utilidades de carga, limpieza y configuración de rutas |
+| [`app/`](app/) | Dashboard Streamlit del EDA |
 
 ## Documentación del taller
 
