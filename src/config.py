@@ -8,3 +8,6 @@ DATA_PROCESSED = PROJECT_ROOT / "data" / "processed"
 NOTEBOOKS_DIR = PROJECT_ROOT / "notebooks"
 
 SUPPORTED_EXTENSIONS = {".csv", ".xlsx", ".xls"}
+
+DENGUE_FILE_PATTERN = "Datos_*_210.xlsx"
+DENGUE_PARQUET = DATA_PROCESSED / "dengue_sivigila.parquet"
