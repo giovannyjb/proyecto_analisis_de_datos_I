@@ -62,7 +62,7 @@ Kernel: **Python (proyecto_analisis_de_datos_I)**.
 | Estructura del repo | Lista |
 | Documentación (`docs/taller1/`) | Respuestas del taller — dengue |
 | Datos en `data/raw/` | 7 archivos descargados (2019–2025, ~872k registros) |
-| Notebook EDA | Esqueleto — sección D pendiente |
+| Notebook EDA | Estructura completa (secciones 1–9); código EDA pendiente por sección |
 | Modelo de regresión | Pendiente |
 
 ## Estructura del repositorio
