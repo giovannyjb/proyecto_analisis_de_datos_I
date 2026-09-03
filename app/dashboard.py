@@ -23,11 +23,14 @@ MESES = {
     7: "Jul", 8: "Ago", 9: "Sep", 10: "Oct", 11: "Nov", 12: "Dic",
 }
 AREA_LABELS = {1: "Urbana", 2: "Rural", 3: "Urbana-rural"}
-COLS_NUM = ["edad_anios", "SEMANA", "mes", "PAC_HOS", "confirmados", "TIP_CAS", "AREA"]
+# Solo numéricas/temporales reales (alineado al notebook del taller)
+COLS_NUM = ["edad_anios", "SEMANA", "mes"]
+ANIO_TALLER = 2025
 
 
 @st.cache_data(show_spinner="Cargando datos de dengue...")
 def cargar_datos(year: int) -> pd.DataFrame:
+    """Carga un año limpio. El filtro FEC_NOT se aplica al año elegido (no solo 2025)."""
     return load_dengue_limpio(year)
 
 
@@ -55,13 +58,24 @@ def aplicar_filtros(
 
 def sidebar_filtros() -> tuple[int, pd.DataFrame]:
     st.sidebar.header("Filtros")
+    st.sidebar.caption(
+        f"El **Taller 1** se centra en **{ANIO_TALLER}**. "
+        "Puedes cambiar el año para explorar otros Excel SIVIGILA disponibles."
+    )
 
-    years = list_dengue_years() or [2025]
-    year = st.sidebar.selectbox("Año", years, index=len(years) - 1)
+    years = list_dengue_years() or [ANIO_TALLER]
+    default_idx = years.index(ANIO_TALLER) if ANIO_TALLER in years else len(years) - 1
+    year = st.sidebar.selectbox("Año", years, index=default_idx)
+
+    if year == ANIO_TALLER:
+        st.sidebar.success(f"Año del taller ({ANIO_TALLER})")
+    else:
+        st.sidebar.info(f"Explorando {year} (fuera del foco del Taller 1)")
 
     if not dengue_parquet_path(year).exists():
         st.sidebar.info(
-            "Primera carga de este año: puede tardar 1–2 min mientras se genera el parquet."
+            "Primera carga de este año: puede tardar 1–2 min mientras se genera el parquet. "
+            f"Se filtrarán notificaciones con FEC_NOT fuera de {year}."
         )
 
     df_year = cargar_datos(year)
@@ -104,9 +118,17 @@ def tab_resumen(df: pd.DataFrame, year: int) -> None:
     c5.metric("Municipios", df["Municipio_ocurrencia"].nunique())
     if df["FEC_NOT"].notna().any():
         c6.metric(
-            "Rango fechas",
+            "Rango FEC_NOT",
             f"{df['FEC_NOT'].min():%Y-%m-%d} → {df['FEC_NOT'].max():%Y-%m-%d}",
         )
+        anios_fec = sorted(df["FEC_NOT"].dt.year.dropna().astype(int).unique())
+        if anios_fec != [year]:
+            st.warning(
+                f"Hay fechas de notificación fuera de {year}: {anios_fec}. "
+                "Regenera el parquet o revisa la limpieza."
+            )
+        else:
+            st.caption(f"Fechas de notificación acotadas al año seleccionado ({year}).")
 
     st.markdown("#### Calidad de datos — columnas con más nulos")
     nulos = (df.isnull().mean() * 100).round(2)
@@ -134,6 +156,39 @@ def tab_temporal(df: pd.DataFrame, year: int) -> None:
         title="Casos por semana epidemiológica", markers=True,
     )
     st.plotly_chart(fig_sem, use_container_width=True)
+
+    resumen_semana = (
+        df.groupby("SEMANA")
+        .agg(casos=("CONSECUTIVE", "count"), pct_hospitalizado=("hospitalizado", "mean"))
+        .reset_index()
+    )
+    fig_dual = go.Figure()
+    fig_dual.add_trace(
+        go.Scatter(
+            x=resumen_semana["SEMANA"], y=resumen_semana["casos"],
+            name="Casos", line=dict(color="steelblue"),
+        )
+    )
+    fig_dual.add_trace(
+        go.Scatter(
+            x=resumen_semana["SEMANA"],
+            y=resumen_semana["pct_hospitalizado"] * 100,
+            name="% hospitalización",
+            yaxis="y2",
+            line=dict(color="darkorange"),
+        )
+    )
+    fig_dual.update_layout(
+        title="Carga semanal y % hospitalización",
+        xaxis_title="Semana epidemiológica",
+        yaxis=dict(title="Casos"),
+        yaxis2=dict(title="% hospitalización", overlaying="y", side="right"),
+        legend=dict(orientation="h"),
+    )
+    st.plotly_chart(fig_dual, use_container_width=True)
+    st.caption(
+        "Los casos pueden bajar tras el pico, pero el % de hospitalización no necesariamente sigue la misma curva."
+    )
 
     if "AREA" in df.columns:
         area_df = df.copy()
@@ -193,7 +248,7 @@ def tab_territorial(df: pd.DataFrame, year: int) -> None:
 
 
 def tab_perfil(df: pd.DataFrame, year: int) -> None:
-    st.subheader(f"Perfil epidemiológico — {year} (H4)")
+    st.subheader(f"Perfil epidemiológico — {year} (H3)")
 
     fig_edad = px.histogram(
         df, x="edad_anios", nbins=40,
@@ -212,6 +267,23 @@ def tab_perfil(df: pd.DataFrame, year: int) -> None:
             area = df["AREA"].map(AREA_LABELS).fillna("Otro").value_counts().reset_index()
             area.columns = ["AREA", "casos"]
             st.plotly_chart(px.pie(area, names="AREA", values="casos", title="Por área"), use_container_width=True)
+
+    deptos = df["Departamento_ocurrencia"].astype(str)
+    if (deptos == "VALLE").any():
+        st.markdown("#### Comparación Valle vs resto (H3)")
+        es_valle = deptos == "VALLE"
+        cmp = pd.DataFrame({
+            "casos": [int(es_valle.sum()), int((~es_valle).sum())],
+            "edad_media": [
+                df.loc[es_valle, "edad_anios"].mean(),
+                df.loc[~es_valle, "edad_anios"].mean(),
+            ],
+            "pct_hospitalizado": [
+                df.loc[es_valle, "hospitalizado"].mean() * 100,
+                df.loc[~es_valle, "hospitalizado"].mean() * 100,
+            ],
+        }, index=["VALLE", "Resto"])
+        st.dataframe(cmp.round(2), use_container_width=True)
 
     estado = (
         df["nom_est_f_caso"].astype(str).value_counts().head(8).reset_index()
@@ -240,6 +312,10 @@ def tab_perfil(df: pd.DataFrame, year: int) -> None:
 
 def tab_correlaciones(df: pd.DataFrame, year: int) -> None:
     st.subheader(f"Análisis bivariado — {year}")
+    st.caption(
+        "Correlación solo con variables numéricas/temporales "
+        "(`edad_anios`, `SEMANA`, `mes`). Códigos como `PAC_HOS`/`AREA` se exploran en otras pestañas."
+    )
 
     cols = [c for c in COLS_NUM if c in df.columns]
     corr = df[cols].corr()
@@ -253,14 +329,15 @@ def tab_correlaciones(df: pd.DataFrame, year: int) -> None:
     fig.update_layout(title="Matriz de correlación", height=500)
     st.plotly_chart(fig, use_container_width=True)
 
-    muestra = df.sample(min(5000, len(df)), random_state=42) if len(df) > 0 else df
+    muestra = df.sample(min(3000, len(df)), random_state=42) if len(df) > 0 else df
     fig_sc = px.scatter(
         muestra, x="edad_anios", y="SEMANA", color="hospitalizado",
-        title="Edad vs. semana epidemiológica (muestra ≤5k)",
+        title="Edad vs. semana epidemiológica (muestra ≤3k)",
         labels={"edad_anios": "Edad (años)", "SEMANA": "Semana", "hospitalizado": "Hospitalizado"},
-        opacity=0.5,
+        opacity=0.45,
     )
     st.plotly_chart(fig_sc, use_container_width=True)
+    st.caption("Si hospitalizado/no se superponen, no hay separación clara a nivel individual.")
 
 
 def tab_explorador(df: pd.DataFrame, year: int) -> None:
@@ -295,8 +372,10 @@ def main() -> None:
     )
     st.title("Dashboard EDA — Dengue SIVIGILA")
     st.caption(
-        "Exploración interactiva de casos dengue (evento 210). "
-        "Complementa el notebook `taller1_eda_dengue.ipynb`."
+        f"Exploración interactiva de casos dengue (evento 210). "
+        f"El notebook del Taller 1 se enfoca en **{ANIO_TALLER}**; "
+        "este dashboard permite revisar **cualquier año** disponible en `data/raw/`. "
+        "Cada año se limpia filtrando `FEC_NOT` al año seleccionado."
     )
 
     year, df = sidebar_filtros()

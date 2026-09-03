@@ -1,42 +1,41 @@
 # Justificación del uso de IA / Ciencia de Datos
 
+> **Visión del proyecto vs alcance Taller 1:** la justificación de largo plazo contempla clima (IDEAM), demografía (DANE) y mortalidad. **En este taller** el EDA usa únicamente `Datos_2025_210.xlsx` (SIVIGILA 2025): casos, hospitalización, territorio y perfil demográfico. No integramos IDEAM/DANE ni analizamos fallecimientos (`FEC_DEF` 100 % nulo).
+
 ## Problema que aborda el análisis
 
-El dengue genera sobrecarga hospitalaria y mortalidad evitable. Integrar manualmente datos epidemiológicos, climáticos y demográficos de múltiples fuentes (INS, IDEAM, DANE) es lento y no permite anticipar brotes. La ciencia de datos e IA permiten modelar riesgo territorial, generar alertas tempranas y orientar la respuesta sanitaria.
+El dengue genera sobrecarga hospitalaria. Con SIVIGILA podemos caracterizar **cuándo** y **dónde** se concentran los casos. La ciencia de datos permite, primero, explorar esa carga (EDA) y, después, modelar el número esperado de casos por municipio–semana para anticipar brotes.
 
 ## Técnicas aplicadas en este proyecto
 
-| Técnica | Uso en este proyecto | Por qué es pertinente |
-|---------|----------------------|----------------------|
-| **Análisis exploratorio de datos (EDA)** | Perfilado de casos, fallecimientos, variables climáticas y demográficas | Primera fase para validar calidad y relaciones antes del modelo |
-| **Analítica predictiva** | Anticipar territorios y periodos con mayor riesgo de brotes y fallecimientos | Responde directamente a la pregunta SMART |
-| **Regresión** | Estimar número esperado de casos y fallecimientos por municipio | Variable continua (conteo de casos/muertes); alineada con el tipo de problema definido |
-| **Análisis espacial** | Mapas de riesgo con coordenadas geográficas | Identificar territorios prioritarios para el piloto |
-| **IA generativa** | Asistencia en notebook, integración de datos y documentación | Acelera el prototipo del taller; el equipo valida resultados |
+| Técnica | Uso ahora (Taller 1) | Uso previsto después | Por qué es pertinente |
+|---------|----------------------|----------------------|------------------------|
+| **EDA** | Perfilado de casos, hospitalización, temporalidad y territorio en Excel 2025 | — | Valida calidad y relaciones antes del modelo |
+| **Analítica predictiva** | Motivación / alcance del proyecto | Anticipar territorios y periodos de mayor riesgo | Responde a la pregunta SMART |
+| **Regresión** | No entrenada aún | Estimar casos agregados municipio–semana | Variable continua alineada al problema |
+| **Análisis territorial** | Ranking depto/municipio (sin shapefiles) | Mapas de riesgo si hay geometrías | Priorizar vigilancia donde hay más carga |
+| **IA generativa** | Asistencia en notebook y documentación (Cursor) | Prototipado continuo | Acelera el taller; el equipo valida resultados |
 
 ## Estado del arte — Referencias
 
 1. **Delpino, F. M., et al. (2026).** Global performance of predictive models for dengue severity, hospitalization and mortality: A systematic review and meta-analysis of 146 studies. *International Journal of Infectious Diseases*. https://doi.org/10.1016/j.ijid.2026.07.014  
-   Valida modelos predictivos (regresión logística, redes neuronales, árboles de decisión) con capacidad para anticipar hospitalización y mortalidad por dengue.
+   Valida modelos predictivos con capacidad para anticipar hospitalización y mortalidad por dengue.
 
 2. **Martin, M. E., et al. (2026).** Assessing environmental and climatic predictors of dengue fever in Santa Marta, Colombia: Implications for One Health surveillance. *Science in One Health*, 5, 100164.  
-   Identifica factores ambientales (temperatura, humedad y lluvias) como indicadores predictivos de brotes.
+   Identifica factores ambientales como indicadores predictivos de brotes (visión futura del proyecto).
 
 3. **Kumar, A., et al. (2026).** Automated detection and prediction of dengue fever: A systematic review (2013–2025). *Engineering Applications of Artificial Intelligence*, 136, 106234.  
-   Concluye que los sistemas automatizados basados en machine learning mejoran la detección temprana y permiten alertas predictivas más precisas.
+   Concluye que sistemas basados en ML mejoran la detección temprana y las alertas predictivas.
 
 ## Contribución esperada al negocio
 
-- Anticipar brotes con precisión > 80 % en el piloto de 6 meses.
-- Reducir mortalidad ≥ 20 % en territorios priorizados.
-- Reducir tiempo de respuesta sanitaria ≥ 30 %.
-- Incrementar cobertura de vigilancia en municipios de alto riesgo.
-- Integrar datos epidemiológicos y climáticos para decisiones basadas en evidencia.
+- **Ahora (EDA 2025):** evidenciar estacionalidad, concentración territorial y perfiles distintos por departamento (p. ej. Valle).
+- **Después:** anticipar brotes con precisión > 80 % en un piloto de 6 meses; reducir mortalidad y tiempo de respuesta cuando haya variables y modelo adecuados.
 
 ## Evidencia de uso de IA generativa
 
-Documentar en el notebook (sección final):
+Documentado en el notebook (sección 9):
 
-- Herramienta usada (ej. Cursor, ChatGPT, Copilot).
-- Qué partes del código o análisis fueron asistidas por IA.
-- Qué validaciones realizó el equipo (datos, lógica, conclusiones).
+- Herramienta: Cursor.
+- Partes asistidas: estructura, limpieza, gráficos, H3, borradores de interpretación.
+- Validación del equipo: datos, cifras (confirmados ≈ 75 %), hipótesis H1–H3 y alcance Excel 2025.

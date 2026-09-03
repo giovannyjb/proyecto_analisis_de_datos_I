@@ -1,26 +1,28 @@
 # Definición del problema — Taller 1
 
+> Contenido canónico para entrega: está **incrustado** en `notebooks/taller1_eda_dengue.ipynb` (sección 1). Este archivo es copia de respaldo en el repo.
+
 ## Tabla de análisis del problema
 
 | Campo | Contenido |
 |-------|-----------|
-| **Descripción del problema e impacto en la organización (incluyendo métrica)** | El aumento recurrente de casos de dengue en el territorio nacional genera una sobrecarga hospitalaria y un incremento en la mortalidad de la población afectada, lo que constituye una amenaza directa para la salud pública. Se requiere validar la tasa de mortalidad en relación con la incidencia de picaduras del vector y determinar los territorios con mayores índices de fallecimientos, con el fin de orientar políticas de prevención y respuesta sanitaria. **Métricas clave:** tasa de mortalidad, incidencia de casos, índice de fallecimientos por territorio. |
-| **Tipo de analítica** | **Predictiva** — el análisis busca anticipar los territorios y periodos con mayor riesgo de brotes de dengue y fallecimientos, utilizando variables epidemiológicas, climáticas y demográficas. Esto permite generar alertas tempranas y orientar la toma de decisiones en salud pública. |
-| **Caso similar (estado del arte)** | Ver referencias en [`justificacion_ia.md`](justificacion_ia.md). Resumen: modelos predictivos (regresión logística, redes neuronales, árboles de decisión) para anticipar hospitalización y mortalidad; factores ambientales (temperatura, humedad, lluvias) como indicadores de brotes; sistemas automatizados con machine learning para detección temprana y alertas predictivas. |
-| **Tipo de problema de IA** | **Regresión** — estimar el número esperado de casos y fallecimientos en los diferentes municipios del país. |
-| **Datos necesarios y disponibilidad** | Datos históricos de casos y fallecimientos por dengue (INS, SIVIGILA); variables meteorológicas (IDEAM): temperatura, lluvia, humedad; datos demográficos y de densidad poblacional (DANE); información sobre saneamiento y presencia de criaderos (Secretarías de Salud); coordenadas geográficas para análisis espacial y mapas de riesgo. **Fuente del equipo:** [Google Drive — Grupo 3](https://drive.google.com/drive/u/1/folders/1NzXBrdwk3EW74dB6GLmYZ_qp86arPvtH). Ver [`docs/datos/fuentes_y_diccionario.md`](../../datos/fuentes_y_diccionario.md). |
-| **Impacto en el negocio con métricas** | 1. Reducción de la tasa de mortalidad por el vector en los territorios con mayores incidencias para los meses continuos. 2. Disminuir la respuesta sanitaria ante brotes de dengue mediante la integración de datos epidemiológicos y climáticos. 3. Incrementar la cobertura de vigilancia de municipios con alto riesgo de brotes. |
-| **Pregunta SMART** | Ver documento dedicado: [`pregunta_smart.md`](pregunta_smart.md). |
+| **Descripción del problema e impacto (con métrica)** | El aumento recurrente de casos de dengue genera sobrecarga hospitalaria y presión sobre la red de atención territorial. KPI del taller (Excel 2025): volumen de casos; % confirmados; % hospitalización; concentración territorial; perfil Valle vs nacional. No medimos mortalidad (`FEC_DEF` 100 % nulo). |
+| **Tipo de analítica** | Predictiva (visión del proyecto). En Taller 1 entregamos el EDA. |
+| **Caso similar (estado del arte)** | Delpino et al. (2026); Martin et al. (2026); Kumar et al. (2026). |
+| **Tipo de problema de IA** | Regresión de casos agregados municipio–semana (fases posteriores). |
+| **Datos usados en este taller** | Única fuente: `Datos_2025_210.xlsx` (SIVIGILA 2025). |
+| **Impacto en el negocio con métricas** | Priorizar territorios de alta carga; anticipar picos temporales; diferenciar perfiles territoriales. |
+| **Pregunta SMART** | Ver sección 1.3 del notebook. |
 
 ## Complejidad del problema
 
 | Aspecto | Descripción |
 |---------|-------------|
-| Variables involucradas | Casos y fallecimientos por municipio, temperatura, lluvia, humedad, densidad poblacional, saneamiento, criaderos, coordenadas geográficas, periodo temporal |
-| Procesos involucrados | Vigilancia epidemiológica (SIVIGILA), monitoreo climático, respuesta sanitaria territorial, políticas de prevención |
-| Dificultad técnica | Alta — integración de múltiples fuentes (INS, IDEAM, DANE, Secretarías de Salud), análisis espacial y modelos predictivos |
+| Variables involucradas | ~70 columnas SIVIGILA (tiempo, territorio, demografía, clínica) |
+| Procesos involucrados | Vigilancia epidemiológica, hospitalización, priorización territorial |
+| Dificultad técnica | Media–alta (fechas texto, códigos, UNI_MED, nulos estructurales) |
 
 ## Notas del equipo
 
-- Actualizar diccionario de datos cuando los archivos estén en `data/raw/`.
+- El entregable principal es el notebook; no se requieren los `.md` para calificar.
 - El EDA (Taller 1) explora los datos antes de construir el modelo de regresión.

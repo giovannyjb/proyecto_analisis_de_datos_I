@@ -73,7 +73,7 @@ Kernel: **Python (proyecto_analisis_de_datos_I)**.
 | Documentación (`docs/taller1/`) | Respuestas del taller — dengue |
 | Datos en `data/raw/` | 7 archivos descargados (2019–2025, ~872k registros) |
 | Notebook EDA | `notebooks/taller1_eda_dengue.ipynb` — secciones 1–9 con código EDA |
-| Dashboard Streamlit | `app/dashboard.py` — 6 pestañas, filtros multi-año (2019–2025) |
+| Dashboard Streamlit | `app/dashboard.py` — 6 pestañas; selector de año (foco Taller 1 = 2025; soporta 2019–2025); `FEC_NOT` filtrado al año elegido |
 | Modelo de regresión | Pendiente |
 
 ## Estructura del repositorio
