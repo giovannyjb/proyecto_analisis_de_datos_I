@@ -4,7 +4,7 @@
 
 ## Pregunta
 
-> ¿Puede un sistema de analítica predictiva basado en inteligencia artificial anticipar brotes de dengue con una precisión superior al 80 %, permitiendo reducir en al menos 20 % la tasa de mortalidad y en 30 % el tiempo de respuesta sanitaria en los territorios priorizados durante un piloto de 6 meses, utilizando datos epidemiológicos, climáticos y demográficos del Instituto Nacional de Salud y el IDEAM?
+> ¿Puede un sistema de analítica predictiva basado en inteligencia artificial anticipar brotes de dengue con una precisión superior al 80 %, permitiendo reducir en al menos 20 % la tasa de mortalidad y en 30 % el tiempo de respuesta sanitaria en los territorios priorizados durante un piloto de 6 meses, utilizando datos epidemiológicos de SIVIGILA (INS)?
 
 ## Desglose SMART
 

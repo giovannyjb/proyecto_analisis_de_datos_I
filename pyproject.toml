@@ -1,7 +1,7 @@
 [project]
 name = "proyecto-analisis-de-datos-i"
 version = "0.1.0"
-description = "Taller 1 — Análisis exploratorio del catálogo de servicios TI (Grupo 3)"
+description = "Taller 1 — EDA dengue SIVIGILA: predicción de brotes (Grupo 3)"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [

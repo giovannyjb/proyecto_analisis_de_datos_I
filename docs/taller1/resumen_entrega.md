@@ -1,6 +1,8 @@
 # Resumen para entrega — Taller 1
 
-Documento consolidado para Moodle · **Grupo 3** · Fecha de entrega: **3 de septiembre de 2026**
+Documento · **Grupo 3** · Fecha de entrega: **3 de septiembre de 2026**
+
+**Repositorio:** [github.com/giovannyjb/proyecto_analisis_de_datos_I](https://github.com/giovannyjb/proyecto_analisis_de_datos_I)
 
 ## Integrantes
 
@@ -74,3 +76,14 @@ EDA ahora para validar calidad, temporalidad, territorio y perfil demográfico. 
 - **Herramienta:** Jupyter Notebook — [`notebooks/taller1_eda_dengue.ipynb`](../../notebooks/taller1_eda_dengue.ipynb)
 - **Estado:** ejecutado con `data/raw/Datos_2025_210.xlsx` (SIVIGILA 2025).
 - **Hallazgos clave:** H1 confirmada (pico ene–feb); H2 confirmada (Bolívar, Santander, Córdoba; top 10 ≈ 70 %); H3 confirmada vs nacional (Valle ≈7.4k casos: edad ↑, sexo equilibrado, hosp. ↓); confirmados ≈ **75 %**.
+- **Complementos en el repo:** dashboard Streamlit (`app/dashboard.py`); datos limpios en `data/processed/dengue_sivigila_2025_limpio.parquet`; documentación en `docs/taller1/` y `README.md`.
+
+## 10. Cómo reproducir
+
+```bash
+uv sync
+# Colocar Datos_2025_210.xlsx en data/raw/ (o descargar con gdown; ver data/README.md)
+uv run jupyter lab notebooks/taller1_eda_dengue.ipynb
+# Opcional:
+uv run streamlit run app/dashboard.py
+```

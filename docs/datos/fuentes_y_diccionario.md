@@ -149,10 +149,11 @@ _Columnas completas (69):_ ver archivo Excel o listado en repo.
 
 ## Generación del diccionario
 
-El diccionario completo (con ejemplos por columna) se genera en el notebook `docs/datos/datos.ipynb` y se exporta a `diccionario_Datos_2022_210.csv`.
+El diccionario operativo del Taller 1 está en la sección 3 del notebook [`notebooks/taller1_eda_dengue.ipynb`](../../notebooks/taller1_eda_dengue.ipynb) (variables clave SIVIGILA 2025). Este documento amplía el inventario multi-año y el detalle por columna.
 
 ## Notas
 
-- Los archivos no se versionan en git (~555 MB total); cada persona los descarga con `gdown` o manualmente.
-- Descarga automática: `gdown --folder "https://drive.google.com/drive/folders/1NzXBrdwk3EW74dB6GLmYZ_qp86arPvtH" -O data/raw/`
+- Los archivos no se versionan en git (~555 MB total); cada persona los descarga con `gdown` o manualmente. Ver [`data/README.md`](../../data/README.md).
+- Descarga automática: `uv run gdown --folder "https://drive.google.com/drive/folders/1NzXBrdwk3EW74dB6GLmYZ_qp86arPvtH" -O data/raw/`
+- **Taller 1:** el EDA calificado usa solo `Datos_2025_210.xlsx`; mortalidad no es medible (`FEC_DEF` 100 % nulo).
 - Referencia metodológica: [sivirep — datos SIVIGILA](https://epiverse-trace.github.io/sivirep/) y diccionario oficial INS/SIVIGILA.

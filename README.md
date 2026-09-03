@@ -1,30 +1,55 @@
 # Proyecto Análisis de Datos I — Taller 1
 
-**Grupo 3** | Predicción de brotes de dengue
+**Grupo 3** | Predicción de brotes de dengue  
+**Entrega:** 3 de septiembre de 2026
 
-Repositorio de trabajo del equipo. Documentación del taller completada; el EDA y el modelo predictivo se desarrollarán cuando los datos estén en `data/raw/`.
+Repositorio del equipo para el Taller 1: definición del problema, pregunta SMART, justificación de IA y análisis exploratorio (EDA) sobre notificaciones SIVIGILA 2025.
+
+## Entregables del taller
+
+| Entregable | Ubicación |
+|------------|-----------|
+| Notebook EDA (principal) | [`notebooks/taller1_eda_dengue.ipynb`](notebooks/taller1_eda_dengue.ipynb) |
+| Resumen consolidado (Moodle) | [`docs/taller1/resumen_entrega.md`](docs/taller1/resumen_entrega.md) |
+| Definición del problema | [`docs/taller1/definicion_problema.md`](docs/taller1/definicion_problema.md) |
+| Pregunta SMART | [`docs/taller1/pregunta_smart.md`](docs/taller1/pregunta_smart.md) |
+| Justificación IA / Ciencia de Datos | [`docs/taller1/justificacion_ia.md`](docs/taller1/justificacion_ia.md) |
+| Fuentes y diccionario | [`docs/datos/fuentes_y_diccionario.md`](docs/datos/fuentes_y_diccionario.md) |
+| Dashboard interactivo (opcional) | [`app/dashboard.py`](app/dashboard.py) |
+
+> El notebook es el entregable canónico: incluye problema, SMART, justificación, diccionario, limpieza, EDA (H1–H3) y evidencia de uso de IA.
 
 ## Problema
 
-El aumento recurrente de casos de dengue en el territorio nacional genera sobrecarga hospitalaria e incremento en la mortalidad. Se requiere validar la tasa de mortalidad frente a la incidencia del vector y determinar territorios con mayores fallecimientos para orientar políticas de prevención y respuesta sanitaria.
+El aumento recurrente de casos de dengue genera sobrecarga hospitalaria y presión sobre la red de atención. Con datos SIVIGILA (evento 210) se caracteriza **cuándo** y **dónde** se concentran los casos para orientar vigilancia y priorización territorial.
 
-## Objetivo del taller
-
-1. Definir el problema, justificación y pregunta SMART.
-2. Construir un análisis exploratorio de datos (EDA) que responda la pregunta SMART.
+En este taller **no** se mide mortalidad (`FEC_DEF` está 100 % nulo en el Excel 2025) ni se entrena el modelo predictivo.
 
 ## Pregunta SMART (resumen)
 
-¿Puede un sistema de analítica predictiva basado en IA anticipar brotes de dengue con precisión > 80 %, reduciendo ≥ 20 % la mortalidad y ≥ 30 % el tiempo de respuesta sanitaria en un piloto de 6 meses, usando datos del INS y el IDEAM?
+¿Puede un sistema de analítica predictiva basado en IA anticipar brotes de dengue con precisión > 80 %, reduciendo ≥ 20 % la mortalidad y ≥ 30 % el tiempo de respuesta sanitaria en un piloto de 6 meses, usando datos epidemiológicos de SIVIGILA (INS)?
 
-Ver desglose completo en [`docs/taller1/pregunta_smart.md`](docs/taller1/pregunta_smart.md).
+**Alcance Taller 1:** EDA sobre `Datos_2025_210.xlsx` (casos, hospitalización, territorio, perfil Valle vs nacional). Las metas de precisión/mortalidad/respuesta quedan para modelado.
+
+Desglose completo: [`docs/taller1/pregunta_smart.md`](docs/taller1/pregunta_smart.md).
+
+## Hallazgos clave del EDA (2025)
+
+- **H1 (estacionalidad):** pico de casos en ene–feb / primeras semanas epidemiológicas.
+- **H2 (heterogeneidad territorial):** top 10 departamentos ≈ 70 % de los casos (p. ej. Bolívar, Santander, Córdoba).
+- **H3 (perfil Valle):** ~7.4k casos; edad media más alta, sexo equilibrado, hospitalización menor que el promedio nacional.
+- **Confirmados:** ≈ 75 % de los casos.
 
 ## Fuente de datos
 
-- **Oficiales:** INS/SIVIGILA, IDEAM, DANE, Secretarías de Salud
-- **Equipo:** [Google Drive — Grupo 3](https://drive.google.com/drive/u/1/folders/1NzXBrdwk3EW74dB6GLmYZ_qp86arPvtH)
+| Fuente | Uso en Taller 1 |
+|--------|-----------------|
+| **INS / SIVIGILA** — `Datos_2025_210.xlsx` (~120.5k filas) | Única fuente del EDA |
+| IDEAM, DANE | Previstas para el proyecto; no integradas aún |
 
-Coloca los archivos descargados en `data/raw/`. Ver [`data/README.md`](data/README.md).
+Archivos multi-año (2019–2025) en Drive del equipo: [Google Drive — Grupo 3](https://drive.google.com/drive/u/1/folders/1NzXBrdwk3EW74dB6GLmYZ_qp86arPvtH).
+
+Coloca los Excel en `data/raw/`. Instrucciones: [`data/README.md`](data/README.md).
 
 ## Configuración del entorno
 
@@ -34,63 +59,66 @@ Con [uv](https://docs.astral.sh/uv/) (recomendado):
 uv sync
 ```
 
-Eso crea `.venv` e instala las dependencias de `pyproject.toml`. En Cursor/VS Code el intérprete apunta a `.venv` vía `.vscode/settings.json`.
+Crea `.venv` e instala las dependencias de `pyproject.toml`.
 
-Para abrir el notebook de datos:
+### Notebook EDA
 
 ```bash
-uv run jupyter lab docs/datos/datos.ipynb
+uv run jupyter lab notebooks/taller1_eda_dengue.ipynb
 ```
 
-O abre `docs/datos/datos.ipynb` en Cursor y selecciona el kernel **Python (proyecto_analisis_de_datos_I)** / intérprete `.venv`.
+O abre el notebook en Cursor/VS Code y selecciona el intérprete `.venv` / kernel del proyecto.
 
-## Dashboard interactivo (Streamlit)
+### Dashboard Streamlit (opcional)
 
-Exploración interactiva del EDA de dengue con filtros territoriales y temporales:
+Exploración interactiva con filtros territoriales y temporales (foco 2025; soporta 2019–2025):
 
 ```bash
 uv run streamlit run app/dashboard.py
 ```
 
-El dashboard carga datos limpios desde `data/processed/dengue_sivigila_{año}_limpio.parquet` o los genera automáticamente desde `data/raw/` la primera vez.
+Carga `data/processed/dengue_sivigila_{año}_limpio.parquet` o lo genera desde `data/raw/` la primera vez.
 
-Alternativa con pip:
+### Alternativa con pip
 
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate   # Windows: .venv\Scripts\activate
 pip install -r requirements.txt
-jupyter lab
+jupyter lab notebooks/taller1_eda_dengue.ipynb
 ```
 
-Kernel: **Python (proyecto_analisis_de_datos_I)**.
+### Descargar datos (si no están en `data/raw/`)
+
+```bash
+uv run gdown --folder "https://drive.google.com/drive/folders/1NzXBrdwk3EW74dB6GLmYZ_qp86arPvtH" -O data/raw/
+```
+
+Para el EDA del Taller 1 basta con `Datos_2025_210.xlsx`.
 
 ## Estado actual
 
 | Área | Estado |
 |------|--------|
-| Estructura del repo | Lista |
-| Documentación (`docs/taller1/`) | Respuestas del taller — dengue |
-| Datos en `data/raw/` | 7 archivos descargados (2019–2025, ~872k registros) |
-| Notebook EDA | `notebooks/taller1_eda_dengue.ipynb` — secciones 1–9 con código EDA |
-| Dashboard Streamlit | `app/dashboard.py` — 6 pestañas; selector de año (foco Taller 1 = 2025; soporta 2019–2025); `FEC_NOT` filtrado al año elegido |
-| Modelo de regresión | Pendiente |
+| Documentación (`docs/taller1/`) | Lista para entrega |
+| Datos en `data/raw/` | 7 Excel (2019–2025); EDA usa 2025 |
+| Notebook EDA | `notebooks/taller1_eda_dengue.ipynb` — secciones 1–9 ejecutadas |
+| Datos limpios | `data/processed/dengue_sivigila_2025_limpio.parquet` |
+| Dashboard Streamlit | `app/dashboard.py` — listo |
+| Modelo de regresión | Pendiente (fases posteriores) |
 
 ## Estructura del repositorio
 
 | Carpeta / archivo | Contenido |
 |-------------------|-----------|
-| [`docs/taller1/`](docs/taller1/) | Definición del problema, pregunta SMART, justificación IA y resumen para entrega |
-| [`docs/datos/`](docs/datos/) | Fuentes de datos y diccionario de columnas |
-| [`data/raw/`](data/raw/) | Datos originales (no versionados si son grandes) |
-| [`data/processed/`](data/processed/) | Datos limpios exportados del EDA |
-| [`notebooks/`](notebooks/) | Notebook Jupyter del EDA |
-| [`src/`](src/) | Utilidades de carga, limpieza y configuración de rutas |
-| [`app/`](app/) | Dashboard Streamlit del EDA |
+| [`docs/taller1/`](docs/taller1/) | Problema, SMART, justificación IA y resumen de entrega |
+| [`docs/datos/`](docs/datos/) | Fuentes y diccionario de columnas SIVIGILA |
+| [`data/raw/`](data/raw/) | Excel originales (no versionados en git) |
+| [`data/processed/`](data/processed/) | Parquet limpios exportados del EDA |
+| [`notebooks/`](notebooks/) | Notebook del EDA (entregable principal) |
+| [`src/`](src/) | Carga, limpieza y rutas (`dengue_clean.py`, `load_data.py`) |
+| [`app/`](app/) | Dashboard Streamlit |
 
-## Documentación del taller
+## Integrantes (Grupo 3)
 
-- [Definición del problema](docs/taller1/definicion_problema.md)
-- [Pregunta SMART](docs/taller1/pregunta_smart.md)
-- [Justificación IA / Ciencia de Datos](docs/taller1/justificacion_ia.md)
-- [Resumen para entrega](docs/taller1/resumen_entrega.md)
+Juan Manuel Román Villa · Dora Valencia Martínez · Julian Aguilar Mayorga · Camilo Percy Ocampo · Viviana Fernández Payan · Giovanni Jaramillo Bolaños · Victor Manuel Hurtado López
