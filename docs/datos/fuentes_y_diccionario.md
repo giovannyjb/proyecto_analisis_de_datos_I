@@ -61,17 +61,17 @@ _Columnas completas (69):_ ver archivo Excel o listado en repo.
 | COD_PRE | int | Código del prestador de salud | 0.0 |
 | COD_SUB | int | Código de sede/subsede del prestador | 0.0 |
 | EDAD | int | Edad del paciente | 0.0 |
-| UNI_MED | int | Unidad de edad (1=años, 2=meses, 3=días) | 0.0 |
+| UNI_MED | categórico | Unidad de edad (1=años, 2=meses, 3=días) | 0.0 |
 | SEXO | texto | Sexo (M/F) | 0.0 |
 | FEC_CON | texto | Fecha de confirmación | 0.0 |
 | INI_SIN | texto | Fecha de inicio de síntomas | 0.0 |
-| TIP_CAS | int | Tipo de caso (2=Probable, 3=Confirmado) | 0.0 |
-| PAC_HOS | int | Hospitalizado (1=Sí, 2=No) | 0.0 |
+| TIP_CAS | categórico | Tipo de caso (2=Probable, 3=Confirmado) | 0.0 |
+| PAC_HOS | categórico | Hospitalizado (1=Sí, 2=No) | 0.0 |
 | FEC_HOS | texto | Fecha de hospitalización | 47.2 |
-| CON_FIN | int | Condición final del paciente | 0.0 |
+| CON_FIN | categórico | Condición final del paciente | 0.0 |
 | FEC_DEF | float | Fecha de defunción | 100.0 |
-| confirmados | int | Caso confirmado (1=Sí, 0=No) | 0.0 |
-| Estado_final_de_caso | int | Código estado final | 0.0 |
+| confirmados | categórico | Caso confirmado (1=Sí, 0=No) | 0.0 |
+| Estado_final_de_caso | categórico | Código estado final | 0.0 |
 | nom_est_f_caso | texto | Estado final (ej. Confirmado por laboratorio) | 0.0 |
 
 ### Diccionario — Ubicación geográfica
@@ -86,7 +86,7 @@ _Columnas completas (69):_ ver archivo Excel o listado en repo.
 | COD_MUN_R / Municipio_residencia | int / texto | Municipio de residencia |
 | COD_DPTO_N / Departamento_Notificacion | int / texto | Departamento de notificación |
 | COD_MUN_N / Municipio_notificacion | int / texto | Municipio de notificación |
-| AREA | int | Área (1=Urbana, 2=Rural, 3=Urbana-rural) |
+| AREA | categórico | Área (1=Urbana, 2=Rural, 3=Urbana-rural) |
 
 ### Diccionario — Población y afiliación
 

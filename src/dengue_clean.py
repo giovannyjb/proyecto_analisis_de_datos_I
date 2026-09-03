@@ -9,7 +9,7 @@ import pandas as pd
 from src.config import DATA_PROCESSED
 from src.load_data import load_dengue
 
-COLS_VACIAS = ["GRU_POB", "CBMTE", "FEC_DEF", "FM_FUERZA", "FM_UNIDAD", "FM_GRADO"]
+COLS_VACIAS = ["GRU_POB", "CBMTE", "FEC_DEF", "FM_FUERZA", "FM_UNIDAD", "FM_GRADO", "COD_ASE"]
 COLS_FECHA = ["FEC_NOT", "INI_SIN", "FEC_HOS", "FEC_CON", "FECHA_NTO"]
 
 
